@@ -5,15 +5,28 @@ assignment. Lengths are in millimetres and joint angles are in degrees.
 
 ## Run the verification
 
-From the repository root, use Python 3.11 or newer in your Python environment.
+From the repository root, use Python 3.11 or newer to set up a virtual
+environment and run the full suite.
 
 ~~~sh
+python3 -m venv .venv
+source .venv/bin/activate
 python -m pip install -r requirements.txt
 python -m unittest -v
 ~~~
 
-The 10 tests print expected and computed values and exit nonzero on failure.
-They use an absolute comparison tolerance of $10^{-9}$.
+Each passing test shows `ok`. The full suite should end with `Ran 10 tests`
+and `OK`. The tests print expected and computed values, use an absolute
+comparison tolerance of $10^{-9}$, and exit nonzero on failure.
+
+To check tasks individually, run any of these commands in the same environment.
+
+~~~sh
+python -m unittest -v test_robot.RegistrationTests   # Task 1
+python -m unittest -v test_robot.WorkspaceTests      # Task 2
+python -m unittest -v test_robot.KinematicsTests     # Task 3
+python -m unittest -v test_robot.TargetingErrorTests # Task 4
+~~~
 
 ## 1. MRI-to-robot transform (13 points)
 
