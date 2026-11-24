@@ -1,4 +1,10 @@
-"""Ground-truth checks for Tasks 1-4. Run with python -m unittest -v."""
+"""
+Ground-truth checks for Tasks 1–4. Run with python -m unittest -v.
+
+PDF reference
+  * HW-Robot-Nav.pdf, pp. 2–3 and 7, gives the model inputs, required test
+    cases, and rubric. The case inputs and expected outputs are hand-computed.
+"""
 
 import unittest
 from math import sqrt
@@ -7,12 +13,22 @@ import numpy as np
 
 from geometry import transform_point
 from inverse_kinematics import forward_kinematics, inverse_kinematics
-from maximum_targeting_error import MAX_TRE_MM
+from maximum_targeting_error import (
+    ABLATION_DIAMETER_MM,
+    LESION_DIAMETER_MM,
+    MAX_TRE_MM,
+)
 from mri_to_robot_transform import M_ROBOT, mri_to_robot
-from workspace import workspace_limits
+from workspace import (
+    PROSTATE_RADIUS_MM,
+    RECTAL_WALL_MM,
+    SHAFT_RADIUS_MM,
+    workspace_limits,
+)
 
 
 TOL = 1e-9
+EXPECTED_ROBOT_MARKERS = [[0, -60, -100], [0, 0, -100], [0, -10, -20]]
 PROSTATE_CENTER = np.array([0.0, -55.0, 55.0])
 PROSTATE_RADIUS = 30.0
 
@@ -34,7 +50,7 @@ class RegistrationTests(unittest.TestCase):
         transform = mri_to_robot(markers_mri)
         mapped = [transform_point(transform, marker) for marker in markers_mri]
         check_close("MRI-to-robot matrix", transform, expected_transform)
-        check_close("M1-M3 in robot coordinates (mm)", mapped, M_ROBOT)
+        check_close("M1-M3 in robot coordinates (mm)", mapped, EXPECTED_ROBOT_MARKERS)
 
     def test_translation(self):
         # MRI pose adds (10, 20, 30) to each robot-frame marker.
@@ -58,7 +74,8 @@ class RegistrationTests(unittest.TestCase):
         )
 
     def test_coincident_frames(self):
-        self.check_registration(M_ROBOT, np.eye(4))
+        check_close("robot-frame marker model (mm)", M_ROBOT, EXPECTED_ROBOT_MARKERS)
+        self.check_registration(EXPECTED_ROBOT_MARKERS, np.eye(4))
 
 
 class KinematicsTests(unittest.TestCase):
@@ -90,6 +107,9 @@ class KinematicsTests(unittest.TestCase):
 
 class WorkspaceTests(unittest.TestCase):
     def test_joint_extrema(self):
+        check_close("shaft radius, wall thickness, prostate radius (mm)",
+                    (SHAFT_RADIUS_MM, RECTAL_WALL_MM, PROSTATE_RADIUS_MM),
+                    (15, 10, 30))
         # Each pair of sphere boundary points attains one joint's two limits.
         half_diagonal = 15 * sqrt(2)
         tangent_x = 30 * sqrt(55**2 - 30**2) / 55
@@ -122,6 +142,8 @@ class WorkspaceTests(unittest.TestCase):
 
 class TargetingErrorTests(unittest.TestCase):
     def test_maximum_targeting_error(self):
+        check_close("ablation and lesion diameters (mm)",
+                    (ABLATION_DIAMETER_MM, LESION_DIAMETER_MM), (12, 6))
         check_close("maximum targeting error (mm)", MAX_TRE_MM, 3.0)
 
 

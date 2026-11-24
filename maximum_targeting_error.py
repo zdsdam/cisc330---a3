@@ -16,6 +16,10 @@ Plan
 Boundary case
   * At the 3 mm error limit, the lesion touches the ablation boundary from
     the inside and is still fully covered.
+
+PDF references
+  * HW-Robot-Nav.pdf, p. 3, gives the two diameters and the ablation model.
+  * MathPrimer-Part1.pdf, p. 22, gives the sphere model used for both volumes.
 """
 
 ABLATION_DIAMETER_MM = 12.0

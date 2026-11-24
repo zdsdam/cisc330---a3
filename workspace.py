@@ -18,6 +18,12 @@ Plan
   Use the sphere's nearest and farthest points for depth, the two rays
   tangent to its xy projection for rotation, and the extrema of z - depth
   for translation. At 45 degrees, needle travel is sqrt(2) times depth.
+
+PDF references
+  * HW-Robot-Nav.pdf, pp. 1–2, shows the joint axes and gives the shaft
+    diameter, wall thickness, prostate radius, needle angle, and depth model.
+  * MathPrimer-Part1.pdf, pp. 7 and 22, gives the cylindrical coordinates
+    and sphere equation used in the workspace derivation.
 """
 
 from math import asin, degrees, isfinite, sqrt

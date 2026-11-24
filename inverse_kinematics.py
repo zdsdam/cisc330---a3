@@ -18,6 +18,14 @@ Plan
 Edge cases
   * Zero depth puts the tip on the shaft axis for any shaft rotation.
   * An inverse target on that axis has no unique rotation and raises ValueError.
+
+PDF references
+  * HW-Robot-Nav.pdf, pp. 1–3, gives the joint axes, nominal home, local
+    M4 tip formula, and forward/inverse kinematics requirements.
+  * MathPrimer-Part1.pdf, p. 7, gives the cylindrical coordinate model.
+  * MathPrimer-Part2.pdf, pp. 16–18, gives rotation about +z.
+  * MRI-Robotic-Prostate-Biopsy.pdf, pp. 9 and 17, illustrates the three
+    joint motions and how they are used in kinematics.
 """
 
 import numpy as np

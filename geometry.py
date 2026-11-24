@@ -1,4 +1,11 @@
-"""Shared rigid geometry from CISC/CMPE 330 Assignment 2."""
+"""
+Shared rigid geometry from CISC/CMPE 330 Assignment 2.
+
+PDF references
+  * MathPrimer-Part1.pdf, p. 42, constructs the marker frame.
+  * MathPrimer-Part2.pdf, pp. 16–18, 21–23, and 34–37, covers axial rotation,
+    homogeneous transforms, and frame changes.
+"""
 
 import numpy as np
 

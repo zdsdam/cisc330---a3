@@ -16,6 +16,18 @@ Plan
 Edge cases
   * The three markers must be finite, non-collinear, and in M1–M3 order.
   * Coincident MRI and robot frames give the identity transform.
+
+PDF references
+  * HW-Robot-Nav.pdf, p. 2, gives the marker coordinates, robot frame,
+    and required MRI-to-robot transform.
+  * MathPrimer-Part1.pdf, p. 42, constructs the basis and centroid.
+  * MathPrimer-Part2.pdf, pp. 21–23 and 34–37, covers homogeneous
+    transforms and their composition and inversion.
+  * MathPrimer-Part3.pdf, pp. 2–3, explains transform direction.
+  * MRI-Robotic-Prostate-Biopsy.pdf, p. 10, shows the MRI-to-robot
+    composition through the marker frame.
+  * MRI-Basics.pdf, pp. 14–17, gives frequency-encoding context for the
+    MRI measurements supplied to this module.
 """
 
 import numpy as np
