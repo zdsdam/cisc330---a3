@@ -152,7 +152,7 @@ signed bearing from $-y$. Subtract the insertion contribution from the
 target's $z$ coordinate to recover translation.
 
 $$
-d=\sqrt{x^2+y^2},\qquad \theta=\operatorname{atan2}(x,-y),\qquad t=z-d.
+d=\sqrt{x^2+y^2},\qquad \theta=\mathrm{atan2}(x,-y),\qquad t=z-d.
 $$
 
 In [inverse_kinematics.py](inverse_kinematics.py),
