@@ -6,9 +6,10 @@ from math import sqrt
 import numpy as np
 
 from geometry import transform_point
-from kinematics import forward_kinematics, inverse_kinematics
-from registration import M_ROBOT, mri_to_robot
-from workspace import MAX_TRE_MM, workspace_limits
+from inverse_kinematics import forward_kinematics, inverse_kinematics
+from maximum_targeting_error import MAX_TRE_MM
+from mri_to_robot_transform import M_ROBOT, mri_to_robot
+from workspace import workspace_limits
 
 
 TOL = 1e-9
@@ -118,6 +119,8 @@ class WorkspaceTests(unittest.TestCase):
                     workspace_limits(65)["translation_mm"],
                     np.array(limits["translation_mm"]) + 10)
 
+
+class TargetingErrorTests(unittest.TestCase):
     def test_maximum_targeting_error(self):
         check_close("maximum targeting error (mm)", MAX_TRE_MM, 3.0)
 

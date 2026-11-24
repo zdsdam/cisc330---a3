@@ -54,9 +54,10 @@ F_{\mathrm{MRI}\leftarrow\mathrm{marker}}^{-1},\qquad
 p_{\mathrm{robot}}=F_{\mathrm{robot}\leftarrow\mathrm{MRI}}p_{\mathrm{MRI}}.
 $$
 
-`mri_to_robot(markers_mri)` takes a $3\times3$ array with one marker per row
-and returns this $4\times4$ matrix. Points in the equation are homogeneous
-column vectors with last coordinate $1$. The Assignment 2 geometry helpers
+`mri_to_robot(markers_mri)` in [mri_to_robot_transform.py](mri_to_robot_transform.py)
+takes a $3\times3$ array with one marker per row and returns this $4\times4$
+matrix. Points in the equation are homogeneous column vectors with last
+coordinate $1$. The Assignment 2 geometry helpers
 compute the bases, rigid inverse, and composition. [A2 geometry.py](https://github.com/simondeveaux06/cisc330---a2/blob/d1aacab33a06d3f179bfbb992c9ad3c198e63626/geometry.py)
 
 ### Hand calculations and verification
@@ -113,8 +114,9 @@ range above, and applying those settings reaches the target. Thus the ranges
 cover the full sphere. Each joint bound is attained by a sphere boundary
 point. The tests check all six witnesses, with joint-limit errors at most
 $7.11\times10^{-15}$ on the verification run. The translation stroke is
-$2\sqrt{2}R=84.853$ mm for any $z_c$. `workspace_limits(prostate_z_mm)` returns
-the four ranges as named pairs of minimum and maximum values.
+$2\sqrt{2}R=84.853$ mm for any $z_c$. `workspace_limits(prostate_z_mm)` in
+[workspace.py](workspace.py) returns the four ranges as named pairs of minimum
+and maximum values.
 
 ## 3. Forward and inverse kinematics (18 points)
 
@@ -140,6 +142,7 @@ $$
 d=\sqrt{x^2+y^2},\qquad \theta=\operatorname{atan2}(x,-y),\qquad t=z-d.
 $$
 
+In [inverse_kinematics.py](inverse_kinematics.py),
 `forward_kinematics(translation_mm, rotation_deg, depth_mm)` returns a tip
 in millimetres. `inverse_kinematics(target_robot_mm)` returns the three
 settings in that same order, with the principal angle in degrees. At
@@ -174,8 +177,9 @@ e_{\max}=6-3=3\ \mathrm{mm}.
 $$
 
 At equality the lesion just touches the ablation boundary internally.
-`workspace.MAX_TRE_MM` evaluates to **3.0 mm**, which the test verifies and
-Task 7 can import as its targeting-error limit.
+`MAX_TRE_MM` in [maximum_targeting_error.py](maximum_targeting_error.py)
+evaluates to **3.0 mm**, which the test verifies and Task 7 can import as its
+targeting-error limit.
 
 ## Course references
 

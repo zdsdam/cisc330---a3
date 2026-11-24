@@ -1,4 +1,24 @@
-"""Ideal straight-needle kinematics in the fixed home robot frame."""
+"""
+inverse_kinematics.py — solve the robot's forward and inverse kinematics.
+
+Inputs (from the assignment)
+  translation_mm   signed translation t along the shaft's +z axis (mm)
+  rotation_deg     right-handed shaft rotation theta about +z (degrees)
+  depth_mm         nonnegative handout depth d (mm), with local tip (0, -d, d)
+  target_robot_mm  desired tip position (x, y, z) in the home robot frame (mm)
+
+Outputs
+  Forward  needle tip (x, y, z) in the fixed home robot frame (mm)
+  Inverse  joint settings (translation_mm, rotation_deg, depth_mm)
+
+Plan
+  Forward rotates (0, -d, d) about +z and adds (0, 0, t).
+  Inverse uses d = hypot(x, y), theta = atan2(x, -y), and t = z - d.
+
+Edge cases
+  * Zero depth puts the tip on the shaft axis for any shaft rotation.
+  * An inverse target on that axis has no unique rotation and raises ValueError.
+"""
 
 import numpy as np
 

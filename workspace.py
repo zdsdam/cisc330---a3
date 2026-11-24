@@ -1,4 +1,24 @@
-"""Joint ranges and maximum targeting error for the assignment geometry."""
+"""
+workspace.py — compute the joint ranges needed to reach the prostate sphere.
+
+Inputs and assumptions
+  shaft radius     15 mm
+  wall thickness   10 mm
+  prostate radius  30 mm, with the sphere tangent to the wall on the -y side
+  needle angle     45 degrees from the +z axis
+  prostate_z_mm    chosen axial coordinate of the sphere center (mm)
+
+Outputs
+  translation_mm    minimum and maximum translation along +z (mm)
+  rotation_deg      minimum and maximum rotation about +z (degrees)
+  depth_mm          minimum and maximum depth in the handout's model (mm)
+  needle_travel_mm  minimum and maximum travel along the needle (mm)
+
+Plan
+  Use the sphere's nearest and farthest points for depth, the two rays
+  tangent to its xy projection for rotation, and the extrema of z - depth
+  for translation. At 45 degrees, needle travel is sqrt(2) times depth.
+"""
 
 from math import asin, degrees, isfinite, sqrt
 
@@ -7,10 +27,6 @@ SHAFT_RADIUS_MM = 15.0
 RECTAL_WALL_MM = 10.0
 PROSTATE_RADIUS_MM = 30.0
 PROSTATE_OFFSET_MM = SHAFT_RADIUS_MM + RECTAL_WALL_MM + PROSTATE_RADIUS_MM
-
-ABLATION_DIAMETER_MM = 12.0
-LESION_DIAMETER_MM = 6.0
-MAX_TRE_MM = (ABLATION_DIAMETER_MM - LESION_DIAMETER_MM) / 2
 
 
 def workspace_limits(prostate_z_mm):
